@@ -5,7 +5,7 @@ router.get("/", (req,res) =>{
 
 
 
-    res.send("Hello from router")
+    res.render("home")
 })
 
 router.get("/login", (req, res) => {
