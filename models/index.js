@@ -12,14 +12,6 @@ Post.belongsTo(User, {
   onDelete: 'SET NULL'
 });
 
-User.hasMany(Vote, {
-  foreignKey: 'user_id'
-});
-
-Post.hasMany(Vote, {
-  foreignKey: 'post_id'
-});
-
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
   onDelete: 'SET NULL'
