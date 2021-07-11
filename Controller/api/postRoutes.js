@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
         'post_url',
         'title',
         'created_at',
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
     ],
     include: [
         {
@@ -79,3 +78,5 @@ router.delete("/:id", withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
+
+module.exports = router;
