@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
+const {User} = require("../../models")
 
 // get all users
 router.get("/", (req, res) => {
@@ -63,21 +64,9 @@ router.post("/login", (req, res) => {
         });
         return;
     }
-
-    req.session.save(() => {
-        req.session.user_id = dbUserData.id;
-        req.session.username = dbUserData.username;
-        req.session.loggedIn = true;
-
-        res.json({
-        user: dbUserData,
-        message: "You are now logged in!",
-        });
-    });
-
     const validPassword = dbUserData.checkPassword(req.body.password);
-
-    if (!validPassword) {
+console.log('checking password', validPassword)
+    if (!true) { //TO DO: FORCING LOGIN, CHANGE PASSWORD TO HASH
         res.status(400).json({
         message: "Incorrect password!",
         });
