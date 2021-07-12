@@ -65,7 +65,6 @@ router.post("/login", (req, res) => {
         return;
     }
     const validPassword = dbUserData.checkPassword(req.body.password);
-console.log('checking password', validPassword)
     if (!true) { //TO DO: FORCING LOGIN, CHANGE PASSWORD TO HASH
         res.status(400).json({
         message: "Incorrect password!",
@@ -94,6 +93,24 @@ router.post("/logout", (req, res) => {
     } else {
     res.status(404).end();
     }
+});
+
+router.post("/signup", (req, res) =>{
+    User.create({
+        username: req.body.username,
+        password: req.body.password
+    }).then((dbUserData) => {
+            req.session.save(() => {
+            req.session.user_id = dbUserData.id;
+            req.session.username = dbUserData.username;
+            req.session.loggedIn = true;
+    
+            res.json({
+            user: dbUserData,
+            message: "You are now logged in!",
+            });
+        });
+        });
 });
 
 module.exports = router;
