@@ -2,12 +2,13 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth')
 
-// get all users
+const { Post } = require("../../models")
+
+// get all posts
 router.get('/', (req, res) => {
     Post.findAll({
     attributes: [
         'id',
-        'post_url',
         'title',
         'created_at',
     ],
@@ -33,6 +34,7 @@ router.get('/', (req, res) => {
     });
 });
 
+// update posts by ID
 router.put("/:id", withAuth, (req, res) => {
     Post.update({
             title: req.body.title,
@@ -57,7 +59,7 @@ router.put("/:id", withAuth, (req, res) => {
         });
 });
 
-//Delete a post
+// Delete a post by ID
 router.delete("/:id", withAuth, (req, res) => {
     Post.destroy({
             where: {
@@ -78,5 +80,28 @@ router.delete("/:id", withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
+
+// Create a post
+router.post("/", (req, res) => {
+Post.create({
+    title: req.body.title,
+    body: req.body.post_content,
+    user_id: req.session.user_id
+})
+.then((dbPostData) => {
+    if (!dbPostData) {
+        res.status(404).json({
+            message: "Could not create post"
+        });
+        return;
+    }
+    res.json(dbPostData);
+})
+.catch((err) => {
+    console.log(err);
+    res.status(500).json(err);
+});
+});
+
 
 module.exports = router;

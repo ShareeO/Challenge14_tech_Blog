@@ -7,7 +7,6 @@ router.get("/", withAuth, (req, res) => {
     Post.findAll({
     attributes: [
         "id",
-        "post_url",
         "title",
         "created_at"
     ],
@@ -29,6 +28,7 @@ router.get("/", withAuth, (req, res) => {
     .then((dbPostData) => {
         const posts = dbPostData.map((post) => post.get({ plain: true }));
         res.render("dashboard", {
+        layout: "dashboard",
         posts,
         loggedIn: req.session.loggedIn,
         });
@@ -43,7 +43,6 @@ router.get("/edit/:id", withAuth, (req, res) => {
     Post.findOne({
     attributes: [
         "id",
-        "post_url",
         "title",
         "created_at"
     ],
@@ -64,7 +63,8 @@ router.get("/edit/:id", withAuth, (req, res) => {
     })
     .then((dbPostData) => {
         const posts = dbPostData.map((post) => post.get({ plain: true }));
-        res.render("dashboard", {
+        res.render("edit-post", {
+        layout: "dashboard",
         posts,
         loggedIn: req.session.loggedIn,
         });
@@ -74,5 +74,11 @@ router.get("/edit/:id", withAuth, (req, res) => {
         res.status(500).json(err); 
     });
 });
+
+router.get("/new", withAuth, (req, res) => {
+    res.render("new-post", {
+        layout: "dashboard"
+        });
+    })
 
 module.exports = router;
