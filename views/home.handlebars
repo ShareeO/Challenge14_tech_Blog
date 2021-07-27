@@ -2,9 +2,10 @@
   {{#each posts}}
   <div class="card-body">
     <h5 class="card-title">{{title}}</h5>
-    <p class="card-text">{{body}}</p>
+    <p> {{body}}</p>
+    <p> {{created_at}}</p>
   <p>
-    {{User.username}}
+    Created By: {{User.username}}
     </p>
     <a href="#" class="btn btn-primary">View Blog</a>
   </div>
