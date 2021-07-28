@@ -13,16 +13,16 @@
 
     <div>
 
-    <h4> Comments</h4>
+    <h4>Comments</h4>
 
     {{#if post.comments}}
         <div>
-        {{#each}}
+        {{#each post.comments}}
             <div>
-            <p>{{comments_text}}</p>
+            <p>{{comment_text}}</p>
             Created By
             {{User.username}},
-            {{format_date created_at}}
+            {{format_date createdAt}}
             </div>
         {{/each}}
         </div>
@@ -34,11 +34,11 @@
 
         <div>
             <h3>Add Your Comment</h3>
-            <form>
+            <form id="comment-form">
                 <input type="hidden" id="post-id" value="{{post.id}}" />
                 <label>
                     Comment
-                    <textarea id="comments_text"></textarea>
+                    <textarea id="comment-text"></textarea>
                 </label>
 
                 <button type="submit"> Add Comment</button>
@@ -46,3 +46,5 @@
         </div>
 
 </div>
+
+<script src="/javascript/comment.js"
