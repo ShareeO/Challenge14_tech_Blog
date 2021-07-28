@@ -1,0 +1,48 @@
+<div>
+    {{! post Data }}
+    <div>
+    <h3> {{post.title}}</h3>
+
+    <p> {{post.body}}</p>
+
+    <p> {{post.created_at}}</p>
+
+    <p> Created By: {{post.User.username}}</p>
+
+    </div>
+
+    <div>
+
+    <h4> Comments</h4>
+
+    {{#if post.comments}}
+        <div>
+        {{#each}}
+            <div>
+            <p>{{comments_text}}</p>
+            Created By
+            {{User.username}},
+            {{format_date created_at}}
+            </div>
+        {{/each}}
+        </div>
+    {{/if}}
+
+    </div>
+
+        {{!comment form}}
+
+        <div>
+            <h3>Add Your Comment</h3>
+            <form>
+                <input type="hidden" id="post-id" value="{{post.id}}" />
+                <label>
+                    Comment
+                    <textarea id="comments_text"></textarea>
+                </label>
+
+                <button type="submit"> Add Comment</button>
+            </form>
+        </div>
+
+</div>
