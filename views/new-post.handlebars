@@ -1,6 +1,6 @@
 <a href="/dashboard" class="go-back"> &larr; Back to dashboard</a>
 
-<article class="new-page">
+<article class="new-page card px-5 d-grid gap-3">
     <section class="new-form-page">
         <div class="form-heading">
             <h2>
@@ -8,16 +8,18 @@
             </h2>
         </div>
         <div class="form-section">
-            <form class="new-post-form">
+            <form class="new-post-form d-grid gap-3">
                 <div class="post-title-section">
-                    <label for="post-title">Title</label>
-                    <input type="text" name="post-title" id="post-title" value="{{post.title}}" />
+                    <label for="post-title" class="form-label">Title</label>
+                    <input type="text" name="post-title" id="post-title" class="form-control" value="{{post.title}}" />
                 </div>
                 <div class="post-content">
                     <label for="post-content">Content</label>
-                    <textarea class="entry-field" id="post-content" name="post-content">{{post.content}}</textarea>
+                    <textarea class="entry-field form-control" id="post-content" name="post-content">{{post.content}}</textarea>
                 </div>
-                <button type="submit">Save post</button>
+                <div>
+                    <button type="submit" class="login-signup-btn btn btn-primary">Save post</button>
+                </div>
             </form>
         </div>
     </section>

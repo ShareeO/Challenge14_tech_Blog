@@ -1,9 +1,11 @@
+<div class="position-relative">
+
 {{#if posts.length}}
 <section>
     <h2>Your Dashboard</h2>
-    <ul class="post-list">
+    <ul class="post-list list-group">
         {{#each posts as |post|}}
-        <li>
+        <li class="list-group-item">
             {{> post-info post}}
             <a href="/dashboard/edit/{{post.id}}" class="edit-link">edit post</a>
         </li>
@@ -12,9 +14,14 @@
 </section>
 {{/if}}
 
-<section class="new-post-section">
-    <a href="/dashboard/new" id="new">+ Create new post</a>
+<section class="new-post-section position-fixed end-50 bottom-0 mb-5">
+    <h2> <a href="/dashboard/new" id="new">+ Create new post</a> </h2>
 </section>
+
+
+    
+</div>
+
 
 
 <script src="/javascript/create-post.js"></script>

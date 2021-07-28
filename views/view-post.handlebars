@@ -1,6 +1,8 @@
 <div>
     {{! post Data }}
-    <div>
+    <div class="card px-3">
+        <div class="card-body">
+
     <h3> {{post.title}}</h3>
 
     <p> {{post.body}}</p>
@@ -10,13 +12,14 @@
     <p> Created By: {{post.User.username}}</p>
 
     </div>
+    </div>
 
-    <div>
-
+    <div class="mt-4">
     <h4>Comments</h4>
 
     {{#if post.comments}}
-        <div>
+        <div class="card">
+            <div class="card-body">
         {{#each post.comments}}
             <div>
             <p>{{comment_text}}</p>
@@ -24,6 +27,8 @@
             {{User.username}},
             {{format_date createdAt}}
             </div>
+            </div>
+
         {{/each}}
         </div>
     {{/if}}
@@ -32,19 +37,23 @@
 
         {{!comment form}}
 
-        <div>
-            <h3>Add Your Comment</h3>
-            <form id="comment-form">
-                <input type="hidden" id="post-id" value="{{post.id}}" />
-                <label>
-                    Comment
-                    <textarea id="comment-text"></textarea>
+        <div class="mt-4">
+            <div class="card">
+                <div class="card-body">
+                <h3>Add Your Comment</h3>
+                    <form id="comment-form">
+                    <input type="hidden" id="post-id" value="{{post.id}}" />
+                    <label class="form-label">
+                        Comment
+                    <textarea id="comment-text" class="form-control"></textarea>
                 </label>
-
-                <button type="submit"> Add Comment</button>
-            </form>
+                <div>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
         </div>
-
+        </form>
+        </div>
 </div>
+</div>
+
 
 <script src="/javascript/comment.js"
