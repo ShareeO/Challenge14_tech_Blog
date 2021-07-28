@@ -40,11 +40,13 @@ router.get("/", withAuth, (req, res) => {
 });
 
 router.get("/edit/:id", withAuth, (req, res) => {
-    Post.findOne({
+    
+    Post.findByPk(req.params.id, {
     attributes: [
         "id",
         "title",
-        "created_at"
+        "created_at",
+        "body"
     ],
     include: [
         {
@@ -62,10 +64,10 @@ router.get("/edit/:id", withAuth, (req, res) => {
     ],
     })
     .then((dbPostData) => {
-        const posts = dbPostData.map((post) => post.get({ plain: true }));
+        const post = dbPostData.get({ plain:true});
         res.render("edit-post", {
         layout: "dashboard",
-        posts,
+        post,
         loggedIn: req.session.loggedIn,
         });
     })
